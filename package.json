@@ -1,0 +1,52 @@
+{
+  "name": "zenhub-retrospective",
+  "version": "0.1.0",
+  "description": "Recall what you did on the last milestone",
+  "main": "dist/cli.js",
+  "scripts": {
+    "run": "npm run build && node dist/cli.js",
+    "build": "rimraf dist/ && npx babel src -d dist",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "codecov": "codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilbonzo/zenhub-retrospective.git"
+  },
+  "bin": {
+    "zenhub-retrospective": "bin/cli.js",
+    "zr": "bin/cli.js"
+  },
+  "keywords": [
+    "zenhub",
+    "retrospective"
+  ],
+  "author": "Matteo Magni <matteo@magni.me> (magni.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ilbonzo/zenhub-retrospective/issues"
+  },
+  "homepage": "https://github.com/ilbonzo/zenhub-retrospective#readme",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "commander": "^2.13.0",
+    "didyoumean": "^1.2.1",
+    "github": "^13.1.0",
+    "node-zenhub": "^0.2.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^22.1.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.6.1",
+    "codecov": "^3.0.0",
+    "jest": "^22.1.4",
+    "jest-cli": "^22.1.4",
+    "rimraf": "^2.6.2"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "verbose": true
+  }
+}

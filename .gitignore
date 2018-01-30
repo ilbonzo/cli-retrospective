@@ -1,0 +1,7 @@
+config.json
+node_modules
+__tests__/config.json
+coverage
+__mocks__
+
+____todo
