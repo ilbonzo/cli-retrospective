@@ -3,7 +3,6 @@ import { error, bold, messageRed, neonGreen } from '../src/log';
 import chalk from 'chalk';
 
 global.console = {
-    warn: jest.fn(),
     log: jest.fn()
 };
 

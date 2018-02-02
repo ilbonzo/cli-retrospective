@@ -1,6 +1,10 @@
 'use strict';
 
-var _templateObject = _taggedTemplateLiteral(['{bold.hex(\'#0069b9\') ZenHub Retrospective}'], ['{bold.hex(\'#0069b9\') ZenHub Retrospective}']);
+var _taggedTemplateLiteral2 = require('babel-runtime/helpers/taggedTemplateLiteral');
+
+var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
+
+var _templateObject = (0, _taggedTemplateLiteral3.default)(['{bold.hex(\'#0069b9\') ZenHub Retrospective}'], ['{bold.hex(\'#0069b9\') ZenHub Retrospective}']);
 
 var _commander = require('commander');
 
@@ -16,9 +20,9 @@ var _chalk2 = _interopRequireDefault(_chalk);
 
 var _log = require('./log');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _command = require('./command');
 
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _commander2.default.command('ls-milestone').on('--help', function () {
     console.log('');
@@ -28,7 +32,7 @@ _commander2.default.command('ls-milestone').on('--help', function () {
     console.log('           ' + (0, _log.neonGreen)('zenhub-retrospective ls-milestone') + '    => Show list of all milestone');
     console.log('');
 }).action(function (name, option) {
-    console.log('List of milestones');
+    (0, _command.lsMilestone)();
 });
 
 _commander2.default.command('milestone <name>').on('--help', function () {

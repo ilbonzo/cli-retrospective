@@ -1,13 +1,17 @@
 jest.mock('../src/log');
+jest.mock('../src/command');
 
 const _exit = process.exit;
 
 let log;
+let command;
 
 const setup = () => {
     log = require('../src/log');
     log.error = jest.fn();
     log.bold = jest.fn(s => s);
+    command = require('../src/command');
+    command.lsMilestone = jest.fn();
     require('../src/cli');
 };
 
@@ -15,7 +19,6 @@ describe('cli', () => {
     beforeEach(() => {
         process.exit = jest.fn();
         global.console = {
-            warn: jest.fn(),
             log: jest.fn(),
             error: jest.fn()
         };
@@ -53,7 +56,7 @@ describe('cli', () => {
             process.argv = ['node', 'bin/cli.js', 'ls-milestone'];
             setup();
 
-            expect(global.console.log).toHaveBeenCalledWith('List of milestones');
+            expect(command.lsMilestone.mock.calls.length).toBe(1);
         });
 
         it('should call ls-milestone with --help', () => {

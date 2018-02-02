@@ -3,6 +3,7 @@ import didYouMean from 'didyoumean';
 import chalk from 'chalk';
 
 import { error, bold, messageRed, neonGreen } from './log';
+import { lsMilestone } from './command';
 
 program
     .command('ls-milestone')
@@ -21,7 +22,7 @@ program
         console.log('');
     })
     .action((name, option) => {
-        console.log('List of milestones');
+        lsMilestone();
     });
 
 program

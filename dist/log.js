@@ -5,18 +5,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.neonGreen = exports.messageRed = exports.bold = exports.error = undefined;
 
-var _templateObject = _taggedTemplateLiteral(['{red.bold ', '}'], ['{red.bold ', '}']),
-    _templateObject2 = _taggedTemplateLiteral(['{white.bold ', '}'], ['{white.bold ', '}']),
-    _templateObject3 = _taggedTemplateLiteral(['{bold.hex(\'#f00b47\') ', '}'], ['{bold.hex(\'#f00b47\') ', '}']),
-    _templateObject4 = _taggedTemplateLiteral(['{hex(\'#66ff66\') ', '}'], ['{hex(\'#66ff66\') ', '}']);
+var _taggedTemplateLiteral2 = require('babel-runtime/helpers/taggedTemplateLiteral');
+
+var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
+
+var _templateObject = (0, _taggedTemplateLiteral3.default)(['{red.bold ', '}'], ['{red.bold ', '}']),
+    _templateObject2 = (0, _taggedTemplateLiteral3.default)(['{white.bold ', '}'], ['{white.bold ', '}']),
+    _templateObject3 = (0, _taggedTemplateLiteral3.default)(['{bold.hex(\'#f00b47\') ', '}'], ['{bold.hex(\'#f00b47\') ', '}']),
+    _templateObject4 = (0, _taggedTemplateLiteral3.default)(['{hex(\'#66ff66\') ', '}'], ['{hex(\'#66ff66\') ', '}']);
 
 var _chalk = require('chalk');
 
 var _chalk2 = _interopRequireDefault(_chalk);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var error = function error(msg) {
   console.log((0, _chalk2.default)(_templateObject, msg));
