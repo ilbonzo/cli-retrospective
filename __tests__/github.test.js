@@ -1,3 +1,4 @@
+import * as GitHubApi from "@octokit/rest";
 import { getAllMilestones } from '../src/github';
 
 jest.mock('../config.json', () => ({
@@ -11,7 +12,6 @@ jest.mock('../config.json', () => ({
     }
 );
 
-
 describe('getAllMilestones', () => {
 
     beforeEach(() => {
@@ -22,12 +22,13 @@ describe('getAllMilestones', () => {
     });
 
     it('use getAllMilestones', () => {
-        const data = getAllMilestones().then((data) => {
-            var milestones = data.map(function(elem) {
-                console.log(elem.title);
-            });
-        });
 
+        let octokit = GitHubApi.default();
+        const data = getAllMilestones().then((data) => {
+            expect(data.length).toBe(2);
+            expect(data[0].title).toBe('Closer');
+            expect(data[1].title).toBe('The hand that feeds');
+        });
     });
 
 });

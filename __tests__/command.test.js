@@ -20,8 +20,8 @@ describe('lsMilestone', () => {
         github.getAllMilestones = jest.fn(s => {
             var p = new Promise(function(resolve, reject) {
                 resolve([
-                    {'title': 'pippo'},
-                    {'title': 'pluto'}
+                    {'title': 'Closer'},
+                    {'title': 'The hand that feeds'}
                 ]);
             });
             return p;
