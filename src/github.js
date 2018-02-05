@@ -20,7 +20,7 @@ async function getAllMilestones() {
             'sort': 'due_on',
             'direction': 'desc',
             'page': 1,
-            'per_page': 30
+            'per_page': 10
         }
     );
 

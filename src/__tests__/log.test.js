@@ -1,5 +1,5 @@
 
-import { error, bold, messageRed, neonGreen } from '../src/log';
+import { error, bold, messageRed, neonGreen } from '../log';
 import chalk from 'chalk';
 
 global.console = {

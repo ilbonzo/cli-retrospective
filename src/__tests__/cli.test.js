@@ -1,5 +1,5 @@
-jest.mock('../src/log');
-jest.mock('../src/command');
+jest.mock('../log');
+jest.mock('../command');
 
 const _exit = process.exit;
 
@@ -7,12 +7,12 @@ let log;
 let command;
 
 const setup = () => {
-    log = require('../src/log');
+    log = require('../log');
     log.error = jest.fn();
     log.bold = jest.fn(s => s);
-    command = require('../src/command');
+    command = require('../command');
     command.lsMilestone = jest.fn();
-    require('../src/cli');
+    require('../cli');
 };
 
 describe('cli', () => {

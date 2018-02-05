@@ -5,7 +5,7 @@
   "main": "dist/cli.js",
   "scripts": {
     "run": "npm run build && node dist/cli.js",
-    "build": "rimraf dist/ && npx babel src -d dist",
+    "build": "rimraf dist/ && npx babel src -d dist --ignore spec.js,test.js",
     "test": "jest",
     "coverage": "jest --coverage",
     "codecov": "codecov"
@@ -31,6 +31,7 @@
   "dependencies": {
     "@octokit/rest": "^14.0.8",
     "chalk": "^2.3.0",
+    "cli-table2": "^0.2.0",
     "commander": "^2.13.0",
     "didyoumean": "^1.2.1",
     "node-zenhub": "^0.2.3",

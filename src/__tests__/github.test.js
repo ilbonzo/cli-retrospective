@@ -1,5 +1,5 @@
 import * as GitHubApi from "@octokit/rest";
-import { getAllMilestones } from '../src/github';
+import { getAllMilestones } from '../github';
 
 jest.mock('../config.json', () => ({
         'githubUsername': 'trentreznor',
