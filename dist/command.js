@@ -11,7 +11,7 @@ var _table = require('./table');
 
 var _github = require('./github');
 
-var lsMilestone = function lsMilestone() {
+var lsMilestone = function lsMilestone(state, number) {
 
     var milestoneTable = (0, _table.basicTable)();
 
@@ -22,7 +22,7 @@ var lsMilestone = function lsMilestone() {
         vAlign: 'center'
     }], [(0, _log.bold)('TITLE'), (0, _log.bold)('STATE'), (0, _log.bold)('DESCRIPTION'), (0, _log.bold)('OPEN ISSUES'), (0, _log.bold)('CLOSED ISSUES')]);
 
-    (0, _github.getAllMilestones)().then(function (data) {
+    (0, _github.getAllMilestones)(state, number).then(function (data) {
         var milestones = data.map(function (elem) {
             milestoneTable.push([(0, _log.bold)(elem.title), elem.state, elem.description, (0, _log.messageRed)(elem.open_issues), (0, _log.neonGreen)(elem.closed_issues)]);
         });

@@ -2,7 +2,7 @@ import { error, bold, messageRed, neonGreen } from './log';
 import { basicTable } from './table';
 import { getAllMilestones } from './github';
 
-const lsMilestone = () => {
+const lsMilestone = (state, number) => {
 
     const milestoneTable = basicTable();
 
@@ -24,7 +24,7 @@ const lsMilestone = () => {
         ]
     );
 
-    getAllMilestones().then((data) => {
+    getAllMilestones(state, number).then((data) => {
         var milestones = data.map(function(elem) {
             milestoneTable.push(
                 [

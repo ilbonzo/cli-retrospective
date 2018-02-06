@@ -24,15 +24,17 @@ var _command = require('./command');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_commander2.default.command('ls-milestone').on('--help', function () {
+_commander2.default.command('ls-milestone [a]').option('-s, --state <state>', 'state of milestone to show [open|closed|all] default: all').option('-n, --number <number>', 'number of milestone to show, default: 10').on('--help', function () {
     console.log('');
     console.log('  Get list of all milestone.');
     console.log('');
     console.log('  Example:');
     console.log('           ' + (0, _log.neonGreen)('zenhub-retrospective ls-milestone') + '    => Show list of all milestone');
     console.log('');
-}).action(function (name, option) {
-    (0, _command.lsMilestone)();
+}).action(function (name, options) {
+    var state = options.state || 'all';
+    var number = options.number || 10;
+    (0, _command.lsMilestone)(state, number);
 });
 
 _commander2.default.command('milestone <name>').on('--help', function () {

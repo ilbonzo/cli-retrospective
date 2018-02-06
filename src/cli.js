@@ -6,7 +6,9 @@ import { error, bold, messageRed, neonGreen } from './log';
 import { lsMilestone } from './command';
 
 program
-    .command('ls-milestone')
+    .command('ls-milestone [a]')
+    .option('-s, --state <state>', 'state of milestone to show [open|closed|all] default: all')
+    .option('-n, --number <number>', 'number of milestone to show, default: 10')
     .on('--help', () => {
         console.log('');
         console.log(
@@ -21,8 +23,10 @@ program
         );
         console.log('');
     })
-    .action((name, option) => {
-        lsMilestone();
+    .action((name, options) => {
+        let state = options.state || 'all';
+        let number = options.number || 10;
+        lsMilestone(state, number);
     });
 
 program

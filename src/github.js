@@ -11,16 +11,16 @@ octokit.authenticate({
     password: config.githubPassword
 })
 
-async function getAllMilestones() {
+async function getAllMilestones(state, number) {
     const result = await octokit.issues.getMilestones(
         {
             'owner': config.repositoryOwner,
             'repo': config.repository,
-            'state': 'all',
+            'state': state,
             'sort': 'due_on',
             'direction': 'desc',
             'page': 1,
-            'per_page': 10
+            'per_page': number
         }
     );
 
