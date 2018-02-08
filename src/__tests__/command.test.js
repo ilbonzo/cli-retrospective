@@ -1,5 +1,8 @@
-jest.mock('../github');
+jest.mock('../github', () => ({
+    getAllMilestones: jest.fn()
+}));
 
+import github from '../github'
 import { lsMilestone } from '../command';
 
 describe('lsMilestone', () => {
@@ -8,16 +11,8 @@ describe('lsMilestone', () => {
         global.console = {
             log: jest.fn()
         };
-    });
 
-    afterEach(() => {
-        jest.resetModules();
-    });
-
-    it('use lsMilestone', () => {
-
-        let github = require('../github');
-        github.getAllMilestones = jest.fn(s => {
+        github.getAllMilestones.mockImplementation(() => {
             var p = new Promise(function(resolve, reject) {
                 resolve([
                     {
@@ -39,9 +34,25 @@ describe('lsMilestone', () => {
             return p;
         });
 
-        lsMilestone();
+    });
 
-        expect(github.getAllMilestones.mock.calls.length).toBe(1);
+    afterEach(() => {
+        jest.resetModules();
+    });
+
+    it('use lsMilestone with parameters', () => {
+        const spy = jest.spyOn(github, 'getAllMilestones');
+
+        lsMilestone('open', 4);
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith('open', 4);
+
+        lsMilestone('all', 10);
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith('all', 10);
+
+        spy.mockReset();
+        spy.mockRestore();
     });
 
 });
