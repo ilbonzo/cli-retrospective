@@ -3,11 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getAllMilestones = undefined;
+exports.getIssuesForRepo = exports.getAllMilestones = undefined;
 
 var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _promise = require('babel-runtime/core-js/promise');
+
+var _promise2 = _interopRequireDefault(_promise);
 
 var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
@@ -20,7 +24,8 @@ var getAllMilestones = function () {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        _context.next = 2;
+                        _context.prev = 0;
+                        _context.next = 3;
                         return octokit.issues.getMilestones({
                             'owner': config.repositoryOwner,
                             'repo': config.repository,
@@ -31,20 +36,68 @@ var getAllMilestones = function () {
                             'per_page': number
                         });
 
-                    case 2:
+                    case 3:
                         result = _context.sent;
                         return _context.abrupt('return', result.data);
 
-                    case 4:
+                    case 7:
+                        _context.prev = 7;
+                        _context.t0 = _context['catch'](0);
+                        return _context.abrupt('return', _promise2.default.reject({ 'message': _context.t0.message }));
+
+                    case 10:
                     case 'end':
                         return _context.stop();
                 }
             }
-        }, _callee, this);
+        }, _callee, this, [[0, 7]]);
     }));
 
     return function getAllMilestones(_x, _x2) {
         return _ref.apply(this, arguments);
+    };
+}();
+
+var getIssuesForRepo = function () {
+    var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(milestone, state, number) {
+        var result;
+        return _regenerator2.default.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        _context2.prev = 0;
+                        _context2.next = 3;
+                        return octokit.issues.getForRepo({
+                            'owner': config.repositoryOwner,
+                            'repo': config.repository,
+                            'assignee': config.githubUsername,
+                            'milestone': milestone,
+                            'state': state,
+                            'sort': 'created',
+                            'direction': 'desc',
+                            'page': 1,
+                            'per_page': number
+                        });
+
+                    case 3:
+                        result = _context2.sent;
+                        return _context2.abrupt('return', result.data);
+
+                    case 7:
+                        _context2.prev = 7;
+                        _context2.t0 = _context2['catch'](0);
+                        return _context2.abrupt('return', _promise2.default.reject({ 'message': _context2.t0.message }));
+
+                    case 10:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, this, [[0, 7]]);
+    }));
+
+    return function getIssuesForRepo(_x3, _x4, _x5) {
+        return _ref2.apply(this, arguments);
     };
 }();
 
@@ -67,3 +120,4 @@ octokit.authenticate({
 });
 
 exports.getAllMilestones = getAllMilestones;
+exports.getIssuesForRepo = getIssuesForRepo;

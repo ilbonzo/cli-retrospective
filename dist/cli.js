@@ -44,8 +44,10 @@ _commander2.default.command('milestone <name>').on('--help', function () {
     console.log('  Example:');
     console.log('           ' + (0, _log.neonGreen)('zenhub-retrospective milestone 10.10.x') + '    => Show list of all issues in milestone');
     console.log('');
-}).action(function (name, option) {
-    console.log(name);
+}).action(function (name, options) {
+    var state = 'all';
+    var number = 10;
+    (0, _command.getMilestone)(name, state, number);
 });
 
 _commander2.default.on('--help', function () {

@@ -12,19 +12,44 @@ octokit.authenticate({
 })
 
 async function getAllMilestones(state, number) {
-    const result = await octokit.issues.getMilestones(
-        {
-            'owner': config.repositoryOwner,
-            'repo': config.repository,
-            'state': state,
-            'sort': 'due_on',
-            'direction': 'desc',
-            'page': 1,
-            'per_page': number
-        }
-    );
+    try {
+        const result = await octokit.issues.getMilestones(
+            {
+                'owner': config.repositoryOwner,
+                'repo': config.repository,
+                'state': state,
+                'sort': 'due_on',
+                'direction': 'desc',
+                'page': 1,
+                'per_page': number
+            }
+        );
 
-    return result.data;
+        return result.data;
+    } catch (error) {
+        return Promise.reject({ 'message': error.message});
+    }
 }
 
-export { getAllMilestones };
+async function getIssuesForRepo(milestone, state, number) {
+    try {
+        const result = await octokit.issues.getForRepo(
+            {
+                'owner': config.repositoryOwner,
+                'repo': config.repository,
+                'assignee': config.githubUsername,
+                'milestone': milestone,
+                'state': state,
+                'sort': 'created',
+                'direction': 'desc',
+                'page': 1,
+                'per_page': number
+            }
+        );
+        return result.data;
+    } catch (error) {
+        return Promise.reject({ 'message': error.message});
+    }
+}
+
+export { getAllMilestones, getIssuesForRepo };

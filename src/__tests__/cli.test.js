@@ -72,7 +72,7 @@ describe('cli', () => {
             process.argv = ['node', 'bin/cli.js', 'milestone', '10.10.x'];
             setup();
 
-            expect(global.console.log).toHaveBeenCalledWith('10.10.x');
+            expect(command.getMilestone.mock.calls.length).toBe(1);
         });
 
         it('should call milestone with --help', () => {

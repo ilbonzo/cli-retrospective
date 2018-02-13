@@ -1,5 +1,33 @@
+jest.mock('@octokit/rest', () => jest.fn(
+    () => {
+        const api = {
+            'authenticate': jest.fn(),
+            'issues': {
+                'getMilestones': jest.fn( () => {
+                    return {
+                        'data': [
+                            {'title': 'Closer'},
+                            {'title': 'The hand that feeds'}
+                        ]
+                    }
+                }),
+                'getForRepo': jest.fn( () => {
+                    return {
+                        'data': [
+                            {'title': 'Hurt'},
+                            {'title': 'Everyday is exactly the same'}
+                        ]
+                    }
+                })
+            }
+        }
+
+        return api
+    }
+));
+
 import * as GitHubApi from "@octokit/rest";
-import { getAllMilestones } from '../github';
+import { getAllMilestones, getIssuesForRepo } from '../github';
 
 jest.mock('../config.json', () => ({
         'githubUsername': 'trentreznor',
@@ -14,20 +42,33 @@ jest.mock('../config.json', () => ({
 
 describe('getAllMilestones', () => {
 
-    beforeEach(() => {
-    });
-
     afterEach(() => {
         jest.resetModules();
     });
 
     it('use getAllMilestones', () => {
-
-        let octokit = GitHubApi.default();
-        const data = getAllMilestones().then((data) => {
+        const data = getAllMilestones('all', 2).then((data) => {
             expect(data.length).toBe(2);
             expect(data[0].title).toBe('Closer');
             expect(data[1].title).toBe('The hand that feeds');
+        });
+    });
+
+});
+
+describe('getIssuesForRepo', () => {
+
+    afterEach(() => {
+        jest.resetModules();
+    });
+
+    it('use getIssuesForRepo', () => {
+
+        let octokit = GitHubApi.default();
+        const data = getIssuesForRepo('Closer', 'all', 5).then((data) => {
+            expect(data.length).toBe(2);
+            expect(data[0].title).toBe('Hurt');
+            expect(data[1].title).toBe('Everyday is exactly the same');
         });
     });
 

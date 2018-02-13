@@ -3,7 +3,7 @@ import didYouMean from 'didyoumean';
 import chalk from 'chalk';
 
 import { error, bold, messageRed, neonGreen } from './log';
-import { lsMilestone } from './command';
+import { lsMilestone, getMilestone } from './command';
 
 program
     .command('ls-milestone [a]')
@@ -45,8 +45,10 @@ program
         );
         console.log('');
     })
-    .action((name, option) => {
-        console.log(name);
+    .action((name, options) => {
+        let state = 'all';
+        let number = 10;
+        getMilestone(name, state, number);
     });
 
 program.on('--help', () => {

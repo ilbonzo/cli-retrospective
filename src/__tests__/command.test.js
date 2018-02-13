@@ -1,9 +1,10 @@
 jest.mock('../github', () => ({
-    getAllMilestones: jest.fn()
+    getAllMilestones: jest.fn(),
+    getIssuesForRepo: jest.fn(),
 }));
 
 import github from '../github'
-import { lsMilestone } from '../command';
+import { lsMilestone, getMilestone } from '../command';
 
 describe('lsMilestone', () => {
 
@@ -50,6 +51,53 @@ describe('lsMilestone', () => {
         lsMilestone('all', 10);
         expect(spy).toHaveBeenCalled();
         expect(spy).toHaveBeenCalledWith('all', 10);
+
+        spy.mockReset();
+        spy.mockRestore();
+    });
+
+});
+
+
+describe('getMilestone', () => {
+
+    beforeEach(() => {
+        global.console = {
+            log: jest.fn()
+        };
+
+        github.getIssuesForRepo.mockImplementation(() => {
+            var p = new Promise(function(resolve, reject) {
+                resolve([
+                    {
+                        'title': 'Closer',
+                        'state': 'closed',
+                    },
+                    {
+                        'title': 'The hand that feeds',
+                        'state': 'open',
+                    }
+                ]);
+            });
+            return p;
+        });
+
+    });
+
+    afterEach(() => {
+        jest.resetModules();
+    });
+
+    it('use getMilestone with parameters', () => {
+        const spy = jest.spyOn(github, 'getIssuesForRepo');
+
+        getMilestone(10, 'open', 4);
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith(10, 'open', 4);
+
+        getMilestone(11, 'all', 10);
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith(11, 'all', 10);
 
         spy.mockReset();
         spy.mockRestore();
