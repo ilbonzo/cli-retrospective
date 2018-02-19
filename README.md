@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/cli-retrospective.svg)](https://badge.fury.io/js/cli-retrospective)
 [![Build Status](https://travis-ci.org/ilbonzo/cli-retrospective.svg?branch=master)](https://travis-ci.org/ilbonzo/cli-retrospective)
-[![Coverage Status](https://coveralls.io/repos/github/ilbonzo/cli-retrospective/badge.svg?branch=master)](https://coveralls.io/github/ilbonzo/cli-retrospective?branch=master)
+[![codecov](https://codecov.io/gh/ilbonzo/cli-retrospective/branch/master/graph/badge.svg)](https://codecov.io/gh/ilbonzo/cli-retrospective)
 [![Dependencies Status](https://david-dm.org/ilbonzo/cli-retrospective.svg)](https://david-dm.org/ilbonzo/cli-retrospective)
 
 ### A cli tools for restropective
