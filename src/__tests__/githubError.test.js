@@ -11,19 +11,19 @@ jest.mock('@octokit/rest', () => jest.fn(
     }
 ));
 
+jest.mock('../config', () => ({
+    'configGetValues': jest.fn( () => {
+        return {
+            'githubUsername': 'trentreznor',
+            'githubPassword': 'closer',
+            'repositoryOwner': 'nin',
+            'repository': 'the-downward-spiral'
+        }
+    })
+}));
+
 import * as GitHubApi from "@octokit/rest";
 import { getAllMilestones, getIssuesForRepo } from '../github';
-
-jest.mock('../config.json', () => ({
-        'githubUsername': 'trentreznor',
-        'githubPassword': 'closer',
-        'repositoryOwner': 'nin',
-        'repository': 'the-downward-spiral'
-    }),
-    {
-        virtual: true
-    }
-);
 
 describe('getAllMilestones error', () => {
 

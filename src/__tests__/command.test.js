@@ -1,10 +1,50 @@
-jest.mock('../github', () => ({
-    getAllMilestones: jest.fn(),
-    getIssuesForRepo: jest.fn(),
+jest.mock('inquirer', () => ({
+        'prompt': jest.fn( () => Promise.resolve({
+            'username': 'trent',
+            'password': 'cl0s3r',
+            'owner': 'nin',
+            'repository': 'closer',
+        }))
 }));
 
-import github from '../github'
-import { lsMilestone, getMilestone } from '../command';
+jest.mock('../config', () => ({
+    'configSave': jest.fn( (a, cb) => {
+        cb();
+    }),
+}));
+
+jest.mock('../github', () => ({
+    'getAllMilestones': jest.fn(),
+    'getIssuesForRepo': jest.fn(),
+}));
+
+
+import { configSave } from '../config';
+import github from '../github';
+import { setupProgram, lsMilestone, getMilestone } from '../command';
+
+
+describe('setupProgram', () => {
+
+    beforeEach(() => {
+        global.console = {
+            log: jest.fn()
+        };
+    });
+
+    afterEach(() => {
+        jest.resetModules();
+    });
+
+    it('use setupProgram', (done) => {
+        var cb = function (data) {
+            expect(configSave).toHaveBeenCalled();
+            done();
+        }
+        setupProgram(cb);
+    });
+
+});
 
 describe('lsMilestone', () => {
 

@@ -25,7 +25,9 @@ var getAllMilestones = function () {
                 switch (_context.prev = _context.next) {
                     case 0:
                         _context.prev = 0;
-                        _context.next = 3;
+
+                        authenticate();
+                        _context.next = 4;
                         return octokit.issues.getMilestones({
                             'owner': config.repositoryOwner,
                             'repo': config.repository,
@@ -36,21 +38,21 @@ var getAllMilestones = function () {
                             'per_page': number
                         });
 
-                    case 3:
+                    case 4:
                         result = _context.sent;
                         return _context.abrupt('return', result.data);
 
-                    case 7:
-                        _context.prev = 7;
+                    case 8:
+                        _context.prev = 8;
                         _context.t0 = _context['catch'](0);
                         return _context.abrupt('return', _promise2.default.reject({ 'message': _context.t0.message }));
 
-                    case 10:
+                    case 11:
                     case 'end':
                         return _context.stop();
                 }
             }
-        }, _callee, this, [[0, 7]]);
+        }, _callee, this, [[0, 8]]);
     }));
 
     return function getAllMilestones(_x, _x2) {
@@ -66,7 +68,9 @@ var getIssuesForRepo = function () {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         _context2.prev = 0;
-                        _context2.next = 3;
+
+                        authenticate();
+                        _context2.next = 4;
                         return octokit.issues.getForRepo({
                             'owner': config.repositoryOwner,
                             'repo': config.repository,
@@ -79,21 +83,21 @@ var getIssuesForRepo = function () {
                             'per_page': number
                         });
 
-                    case 3:
+                    case 4:
                         result = _context2.sent;
                         return _context2.abrupt('return', result.data);
 
-                    case 7:
-                        _context2.prev = 7;
+                    case 8:
+                        _context2.prev = 8;
                         _context2.t0 = _context2['catch'](0);
                         return _context2.abrupt('return', _promise2.default.reject({ 'message': _context2.t0.message }));
 
-                    case 10:
+                    case 11:
                     case 'end':
                         return _context2.stop();
                 }
             }
-        }, _callee2, this, [[0, 7]]);
+        }, _callee2, this, [[0, 8]]);
     }));
 
     return function getIssuesForRepo(_x3, _x4, _x5) {
@@ -105,19 +109,22 @@ var _rest = require('@octokit/rest');
 
 var GitHubApi = _interopRequireWildcard(_rest);
 
+var _config = require('./config');
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var config = require('../config.json');
-
+var config = (0, _config.configGetValues)();
 var octokit = GitHubApi.default();
 
-octokit.authenticate({
-    type: 'basic',
-    username: config.githubUsername,
-    password: config.githubPassword
-});
+var authenticate = function authenticate() {
+    octokit.authenticate({
+        type: 'basic',
+        username: config.githubUsername,
+        password: config.githubPassword
+    });
+};
 
 exports.getAllMilestones = getAllMilestones;
 exports.getIssuesForRepo = getIssuesForRepo;

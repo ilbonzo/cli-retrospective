@@ -1,6 +1,43 @@
+import inquirer from 'inquirer';
+import * as fs from 'fs';
+import * as path from 'path';
+
+import { configSave } from './config';
 import { error, bold, messageRed, neonGreen } from './log';
 import { basicTable } from './table';
 import { getAllMilestones, getIssuesForRepo } from './github';
+
+const setupProgram = (callback) => {
+
+    inquirer
+        .prompt([
+        {
+            type: 'input',
+            message: 'Enter a github username:',
+            name: 'githubUsername'
+        },
+        {
+            type: 'password',
+            message: 'Enter a github password:',
+            name: 'githubPassword',
+            mask: '*'
+        },
+        {
+            type: 'input',
+            message: 'Enter a github repository:',
+            name: 'repository'
+        },
+        {
+            type: 'input',
+            message: 'Enter a github repository owner:',
+            name: 'repositoryOwner',
+        }
+        ])
+        .then((answers) => {
+            configSave(answers, callback);
+        });
+
+}
 
 const lsMilestone = (state, number) => {
 
@@ -76,4 +113,4 @@ const getMilestone = (milestone, state, number) => {
 
 }
 
-export { lsMilestone, getMilestone };
+export { setupProgram, lsMilestone, getMilestone };

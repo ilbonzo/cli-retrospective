@@ -1,18 +1,21 @@
 
 import * as GitHubApi from "@octokit/rest";
+import { configGetValues } from './config';
 
-const config = require('../config.json');
-
+const config = configGetValues();
 const octokit = GitHubApi.default();
 
-octokit.authenticate({
-    type: 'basic',
-    username: config.githubUsername,
-    password: config.githubPassword
-})
+const authenticate = () => {
+    octokit.authenticate({
+        type: 'basic',
+        username: config.githubUsername,
+        password: config.githubPassword
+    });
+}
 
 async function getAllMilestones(state, number) {
     try {
+        authenticate();
         const result = await octokit.issues.getMilestones(
             {
                 'owner': config.repositoryOwner,
@@ -33,6 +36,7 @@ async function getAllMilestones(state, number) {
 
 async function getIssuesForRepo(milestone, state, number) {
     try {
+        authenticate();
         const result = await octokit.issues.getForRepo(
             {
                 'owner': config.repositoryOwner,

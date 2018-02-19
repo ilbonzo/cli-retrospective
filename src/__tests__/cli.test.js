@@ -1,17 +1,31 @@
 jest.mock('../log');
 jest.mock('../command');
+jest.mock('../config');
 
 const _exit = process.exit;
 
 let log;
 let command;
+let config;
 
-const setup = () => {
+const setup = (configExistValue) => {
     log = require('../log');
     log.error = jest.fn();
     log.bold = jest.fn(s => s);
     command = require('../command');
+    command.setupProgram = jest.fn( (a) => {
+        a();
+    });
     command.lsMilestone = jest.fn();
+    command.getMilestone = jest.fn();
+    config = require('../config');
+    if (typeof configExistValue === 'undefined') {
+        configExistValue = true;
+    }
+    config.configExist = jest.fn( () => {
+        return configExistValue;
+    });
+    config.configGetValues = jest.fn();
     require('../cli');
 };
 
@@ -51,6 +65,37 @@ describe('cli', () => {
         expect(process.exit).toBeCalledWith(1);
     });
 
+    describe('setup command', () => {
+        it('should call setup', () => {
+            process.argv = ['node', 'bin/cli.js', 'setup'];
+            setup();
+
+            expect(command.setupProgram.mock.calls.length).toBe(1);
+        });
+
+        it('should call setup with --help', () => {
+            process.argv = ['node', 'bin/cli.js', 'setup', '--help'];
+            setup();
+
+            expect(global.console.log).toHaveBeenCalledWith('  Setup your cli-retrospective');
+        });
+
+        it('view initial message when call program without options and parameters first time', () => {
+            process.argv = ['node', 'bin/cli.js'];
+            setup(false);
+
+            jest.spyOn(global.console, 'log');
+            expect(global.console.log).toHaveBeenCalledWith('');
+        });
+
+        // it('setup when call program with setup first time', () => {
+        //     process.argv = ['node', 'bin/cli.js', 'setup'];
+        //     setup(false);
+
+        //     expect(command.setupProgram.mock.calls.length).toBe(1);
+        // });
+    });
+
     describe('ls-milestone command', () => {
         it('should call ls-milestone', () => {
             process.argv = ['node', 'bin/cli.js', 'ls-milestone'];
@@ -84,7 +129,7 @@ describe('cli', () => {
     });
 
     describe('--help options', () => {
-        it('should call --help', () => {
+        it('view help when call program without options and parameters', () => {
             process.argv = ['node', 'bin/cli.js'];
             setup();
 
@@ -92,7 +137,7 @@ describe('cli', () => {
             expect(global.console.log).toHaveBeenCalledWith('');
         });
 
-        it('view help when call program without options and parameters', () => {
+        it('should call --help', () => {
             process.argv = ['node', 'bin/cli.js', '--help'];
             setup();
 

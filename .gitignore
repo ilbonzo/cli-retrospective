@@ -1,7 +1,4 @@
-config.json
 node_modules
-__tests__/config.json
+config.json
+config.ilbonzo.json
 coverage
-__mocks__
-
-____todo
