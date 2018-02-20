@@ -7,7 +7,7 @@
 
 ### A cli tools for restropective
 
-```cli-retrospective``` is a simple command line tools to see the issues related to a certain milestone when you have to do retrospective.
+```cli-retrospective``` is a simple command line tools to see the github issues related to a certain milestone when you have to do retrospective.
 
 ![image](public/ls-milestone-screen.png)
 
