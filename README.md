@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/ilbonzo/cli-retrospective.svg?branch=master)](https://travis-ci.org/ilbonzo/cli-retrospective)
 [![codecov](https://codecov.io/gh/ilbonzo/cli-retrospective/branch/master/graph/badge.svg)](https://codecov.io/gh/ilbonzo/cli-retrospective)
 [![Dependencies Status](https://david-dm.org/ilbonzo/cli-retrospective.svg)](https://david-dm.org/ilbonzo/cli-retrospective)
+[![BCH compliance](https://bettercodehub.com/edge/badge/ilbonzo/cli-retrospective?branch=master)](https://bettercodehub.com/)
 
 ### A cli tools for restropective
 
