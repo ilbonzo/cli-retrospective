@@ -5,14 +5,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.basicTable = undefined;
 
-var _cliTable = require('cli-table2');
+var _cliTable = require('cli-table3');
 
-var _cliTable2 = _interopRequireDefault(_cliTable);
+var _cliTable3 = _interopRequireDefault(_cliTable);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var basicTable = function basicTable() {
-    return new _cliTable2.default({
+    return new _cliTable3.default({
         head: [],
         chars: {
             'top': '═',
