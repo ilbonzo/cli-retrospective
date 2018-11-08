@@ -68,7 +68,7 @@ _commander2.default.command('ls-milestone [a]').option('-s, --state <state>', 's
     (0, _command.lsMilestone)(state, number);
 });
 
-_commander2.default.command('milestone <name>').on('--help', function () {
+_commander2.default.command('milestone <name>').option('-n, --number <number>', 'number of milestone to show, default: 20').on('--help', function () {
     console.log('');
     console.log('  Get list of issue in milestone.');
     console.log('');
@@ -77,7 +77,7 @@ _commander2.default.command('milestone <name>').on('--help', function () {
     console.log('');
 }).action(function (name, options) {
     var state = 'all';
-    var number = 10;
+    var number = options.number || 20;
     (0, _command.getMilestone)(name, state, number);
 });
 

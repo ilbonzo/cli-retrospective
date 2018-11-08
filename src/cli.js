@@ -90,6 +90,7 @@ program
 
 program
     .command('milestone <name>')
+    .option('-n, --number <number>', 'number of issues to show, default: 20')
     .on('--help', () => {
         console.log('');
         console.log(
@@ -106,7 +107,7 @@ program
     })
     .action((name, options) => {
         let state = 'all';
-        let number = 10;
+        let number = options.number || 20;
         getMilestone(name, state, number);
     });
 
