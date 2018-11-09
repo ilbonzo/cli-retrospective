@@ -6,8 +6,15 @@ import { configExist } from './config';
 import { error, bold, messageRed, neonGreen } from './log';
 import { setupProgram, lsMilestone, getMilestone } from './command';
 
+import pkg from '../package.json';
+
 var configured = configExist();
 
+program.version(
+    `\ncli-retrospective version: ${neonGreen(pkg.version)}\n`,
+    '-v, --version'
+);
+  
 program
     .command('setup')
     .on('--help', () => {

@@ -87,13 +87,6 @@ describe('cli', () => {
             jest.spyOn(global.console, 'log');
             expect(global.console.log).toHaveBeenCalledWith('');
         });
-
-        // it('setup when call program with setup first time', () => {
-        //     process.argv = ['node', 'bin/cli.js', 'setup'];
-        //     setup(false);
-
-        //     expect(command.setupProgram.mock.calls.length).toBe(1);
-        // });
     });
 
     describe('ls-milestone command', () => {
@@ -147,4 +140,18 @@ describe('cli', () => {
         });
     });
 
+    describe('--version options', () => {
+        it('view version when call program without options and parameters', () => {
+            process.argv = ['node', 'bin/cli.js'];
+            setup();
+
+            jest.spyOn(global.console, 'log');
+            expect(global.console.log).toHaveBeenCalledWith('');
+        });
+
+        it('should call --version', () => {
+            process.argv = ['node', 'bin/cli.js', '--version'];
+            setup();
+        });
+    });
 });
