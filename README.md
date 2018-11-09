@@ -52,7 +52,7 @@ $ cli-retrospective milestone [number]
 ### Running the Tests
 
 ```sh
-$ npm run test
+$ npm test
 ```
 ### Issues
 

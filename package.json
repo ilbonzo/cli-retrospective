@@ -1,6 +1,6 @@
 {
   "name": "cli-retrospective",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Recall what you did on the last milestone",
   "main": "dist/cli.js",
   "scripts": {
