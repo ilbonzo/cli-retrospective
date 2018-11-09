@@ -24,9 +24,15 @@ var _log = require('./log');
 
 var _command = require('./command');
 
+var _package = require('../package.json');
+
+var _package2 = _interopRequireDefault(_package);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var configured = (0, _config.configExist)();
+
+_commander2.default.version('\ncli-retrospective version: ' + (0, _log.neonGreen)(_package2.default.version) + '\n', '-v, --version');
 
 _commander2.default.command('setup').on('--help', function () {
     console.log('');
